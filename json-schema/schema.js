@@ -40,7 +40,7 @@ const convertType = (field) => {
 
 const getValidator = (field) => {
     var formatter = FORMATTERS[field.format];
-    if (!formatter || (formatter && !formatter.disableValidate)) {
+    if (!formatter || !formatter.disableValidate) {
         return (value, next) => {
             var result = validator.validateResult(value, field);
             next(result.valid, result.valid ? undefined : result.error.message);
@@ -64,7 +64,7 @@ function convertSchema(jsonSchema) {
                 type: convertType(field),
                 required: required.indexOf(key) !== -1
             };
-            if (validator) { entry.validate = validator; }
+            if (validator) {entry.validate = validator;}
         }
         schemaTemplate[key] = entry;
     }

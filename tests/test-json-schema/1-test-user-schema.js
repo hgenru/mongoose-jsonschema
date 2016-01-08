@@ -1,6 +1,7 @@
 const chai = require('chai'); chai.should();
 const expect = chai.expect;
 chai.use(require('chai-shallow-deep-equal'));
+chai.use(require('chai-as-promised'));
 
 const co = require('co');
 const mongoose = require('mongoose');
@@ -65,7 +66,7 @@ describe(__filename, function() {
         var modelSchema = getSchema(USER_SCHEMA);
         var TestModel = mongoose.model('Test2', modelSchema);
         var obj = TestModel(VALID_ENTRY);
-        expect(obj.validateSync).to.throw(ValidationError);
+        obj.validate().should.be.rejectedWith(ValidationError);
     }));
 
 });
