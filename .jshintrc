@@ -22,13 +22,9 @@
     "asi": false,
     "noyield": true,
     "globals"   : {
-        "window": false,
-        "document": false,
-        "console": false,
         "describe": false,
         "it": false,
         "beforeEach": false,
-        "io": true,
-        "ko": true
+        "before": true
     }
 }

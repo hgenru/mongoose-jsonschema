@@ -70,4 +70,35 @@ describe(__filename, function() {
         obj.validate().should.be.rejectedWith(ValidationError);
     }));
 
+    it('test enum field', co.wrap(function*() {
+        var schema = getSchema({
+            type: 'object',
+            properties: {
+                gender: {type: 'string', enum: ['male', 'female']}
+            }
+        });
+        var TestModel = mongoose.model('Test1', schema);
+        var t1 = new TestModel({gender: 'male'});
+        yield t1.validate();
+        var t2 = new TestModel({gender: 'transgeder'});
+        yield t2.validate().should.be.rejectedWith(ValidationError);
+    }));
+
+    it('test objectId field', co.wrap(function*() {
+        var schema = getSchema({
+            type: 'object',
+            properties: {
+                _id: {type: 'string', format: 'objectid'}
+            }
+        });
+        var TestModel = mongoose.model('ObjIdField', schema);
+        var t1 = new TestModel({_id: '4edd40c86762e0fb12000003'});
+        yield t1.validate();
+        var t2 = new TestModel({_id: 'invalid_id'});
+        yield t2.validate().should.be.rejectedWith(ValidationError);
+        var t3 = new TestModel({
+            _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000003')
+        });
+        yield t3.validate();
+    }));
 });
