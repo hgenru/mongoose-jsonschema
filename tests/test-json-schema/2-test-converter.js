@@ -1,12 +1,12 @@
+'use strict';
 const chai = require('chai'); chai.should();
-const expect = chai.expect;
 chai.use(require('chai-as-promised'));
 
 const co = require('co');
 const mongoose = require('mongoose');
 const ValidationError = mongoose.ValidationError;
 
-const getSchema = require('../../json-schema/schema');
+const getSchema = require('../../lib/schema');
 
 describe(__filename, function() {
     it('check enum', co.wrap(function*() {

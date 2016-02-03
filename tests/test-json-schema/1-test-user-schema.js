@@ -1,3 +1,4 @@
+'use strict';
 const chai = require('chai'); chai.should();
 const expect = chai.expect;
 chai.use(require('chai-shallow-deep-equal'));
@@ -7,7 +8,7 @@ const co = require('co');
 const mongoose = require('mongoose');
 const ValidationError = mongoose.ValidationError;
 
-const getSchema = require('../../json-schema/schema');
+const getSchema = require('../../lib/schema');
 const USER_SCHEMA_PATH = './assets/user-schema.json';
 const USER_SCHEMA = require(USER_SCHEMA_PATH);
 
@@ -48,10 +49,10 @@ describe(__filename, function() {
                 last: 'Иванов'
             },
             bday: new Date()
-        }
+        };
         var modelSchema = getSchema(USER_SCHEMA);
         var TestModel = mongoose.model('Test', modelSchema);
-        var obj = TestModel(VALID_ENTRY);
+        var obj = new TestModel(VALID_ENTRY);
         yield obj.validate();
     }));
 
@@ -62,10 +63,10 @@ describe(__filename, function() {
                 middle: 'Иванович'
             },
             bday: new Date()
-        }
+        };
         var modelSchema = getSchema(USER_SCHEMA);
         var TestModel = mongoose.model('Test2', modelSchema);
-        var obj = TestModel(VALID_ENTRY);
+        var obj = new TestModel(VALID_ENTRY);
         obj.validate().should.be.rejectedWith(ValidationError);
     }));
 
