@@ -101,4 +101,16 @@ describe(__filename, function() {
         });
         yield t3.validate();
     }));
+
+    it('test mongo prop', co.wrap(function*() {
+        var schema = getSchema({
+            type: 'object',
+            properties: {
+                testRef: {type: 'string', format: 'objectid', mongo: {ref: 'User'}}
+            }
+        });
+        var TestModel = mongoose.model('ObjIdFieldRef', schema);
+        var t1 = new TestModel({testRef: '4edd40c86762e0fb12000003'});
+        yield t1.validate();
+    }));
 });
