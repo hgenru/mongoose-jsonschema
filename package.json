@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
-    "mongoose": "^4.3.4",
+    "mongoose": "^4.4.1",
     "tv4": "^1.2.7",
     "tv4-formats": "^1.0.2"
   },
