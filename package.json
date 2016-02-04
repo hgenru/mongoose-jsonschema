@@ -2,7 +2,7 @@
   "name": "mongoose-jsonschema-tv4",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/schema.js",
   "scripts": {
     "test": "NODE_ENV=testing ./node_modules/.bin/mocha --harmony --reporter spec ./tests/**/test-*.js",
     "coverage": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha \"./tests/**/test-*.js\""
